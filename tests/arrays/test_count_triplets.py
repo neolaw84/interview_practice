@@ -1,7 +1,7 @@
 import unittest
 import tempfile
 
-from tests.utils import remove_file_silently
+from tests.utils import TestTextFile
 from interview_practice.arrays.count_triplets import count_triplets
 
 class CountTripletsTests(unittest.TestCase):
@@ -17,14 +17,9 @@ class CountTripletsTests(unittest.TestCase):
             1 5 3 2
             3
             3 2 7""".replace("  ", "")
-        tf = tempfile.NamedTemporaryFile(mode="w+t", delete=False)
-        tfname = tf.name
-        try:
-            with open (tfname, "wt") as f:
-                f.write(test_data)
+        
+        with TestTextFile(test_data) as tfname:
             results = [2, -1]
             outputs = [output for output in count_triplets(tfname)]
             self.assertListEqual(results, outputs)
-        finally:
-            remove_file_silently(tfname)
         

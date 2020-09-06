@@ -1,4 +1,5 @@
 import sys
+import tempfile
 
 
 class TextFileOrStdInOut(object):
